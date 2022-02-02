@@ -1,0 +1,322 @@
+openapi: "3.0.2"
+info:
+  title: API users REST
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+
+components:
+  schemas:
+    User:
+      description: model representing the user
+      type: object
+      properties:
+        id:
+          type: string
+    Alert:
+      description: model representing the alert
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+    Credential:
+      description: model representing a credential
+      type: object
+      properties:
+        id:
+          type: string
+    Push:
+      description: model representing a push
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          type: string
+    Profile:
+      description: model representing the profile
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+    Search:
+      description: model representing a search
+      type: object
+      properties:
+        id:
+          type: string
+        q:
+          type: string
+        w:
+          type: string
+        country:
+          type: string
+    userId:
+      type: string
+    ISOCountryCode:
+      type: string
+    searchId:
+      type: string
+    credentialId:
+      type: string
+  responses:
+    responseOK:
+      description: "OK"
+      content:
+        application/json:
+          schema: {}
+    responseBAD:
+      description: "BAD REQUEST"
+      content:
+        application/json:
+          schema: {}
+    responseINTERNAL:
+      description: "INTERNAL SERVER ERROR"
+      content:
+        application/json:
+          schema: {}
+
+  parameters:
+    userId:
+      name: userId
+      in: path
+      required: true
+      description: "The user unique identifier key"
+      schema:
+        $ref: "#/components/schemas/userId"
+    ISOCountryCode:
+      name: ISOCountryCode
+      in: path
+      required: true
+      description: "The country code in ISO format"
+      schema:
+        $ref: "#/components/schemas/ISOCountryCode"
+    searchId:
+      name: searchId
+      in: path
+      required: true
+      description: "The Search unique identifier key"
+      schema:
+        $ref: "#/components/schemas/searchId"
+    credentialId:
+      name: credentialId
+      in: path
+      required: true
+      description: "The Credential unique identifier key"
+      schema:
+        $ref: "#/components/schemas/credentialId"
+paths:
+  /user:
+    get:
+      description: "List Users"
+      parameters: []
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    post:
+      description: "Insert User"
+      parameters: []
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user{userId}:
+    get:
+      description: "Get User"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    put:
+      description: "Update User"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    delete:
+      description: "Delete User"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/credentials:
+    get:
+      description: "List all user credentials"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    post:
+      description: "Create new user credential"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/credentials/{credentialId}:
+    get:
+      description: "Get an existing user credential"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/credentialId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    put:
+      description: "Update an existing user credential"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/credentialId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    delete:
+      description: "Delete single user credential"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/credentialId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/search:
+    get:
+      description: "List all user searches"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    post:
+      description: "Create new search"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/search/{searchId}:
+    get:
+      description: "Get an existing user search"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/searchId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    put:
+      description: "Update an existing user search"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/searchId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    delete:
+      description: "Delete single user search"
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/searchId"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/channel/{ISOCountryCode}/:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/channel/{ISOCountryCode}/alert:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /user/{userId}/channel/{ISOCountryCode}/push:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /channel/{ISOCountryCode}/:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /channel/{ISOCountryCode}/alert:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    post:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    put:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    delete:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+  /channel/{ISOCountryCode}/push:
+    get:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    post:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    put:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
+    delete:
+      description: ""
+      parameters:
+        - $ref: "#/components/parameters/ISOCountryCode"
+      responses:
+        "200":
+          $ref: "#/components/responses/responseOK"
